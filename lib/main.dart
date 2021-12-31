@@ -1,4 +1,5 @@
 import 'package:day2/view/screen/about.dart';
+import 'package:day2/view/screen/dog.dart';
 import 'package:day2/view/screen/home.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -29,7 +31,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => const Home(),
-        "/about": (context) => const About()
+        "/about": (context) => const About(),
+        "/dog": (context) => const Dog(),
       },
     );
   }

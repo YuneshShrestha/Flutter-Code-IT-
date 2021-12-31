@@ -6,18 +6,44 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Cards"),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(children: [
-            cardList(),
-            imageBox(context),
-            btnList(context),
-          ]),
+    return SafeArea(
+      child: Scaffold(
+        drawer: Drawer(
+          child: Column(
+            children: const [
+              UserAccountsDrawerHeader(
+                  currentAccountPicture: CircleAvatar(
+                    backgroundColor: Colors.yellow,
+                    child: Text(
+                      "Y",
+                      style: TextStyle(fontSize: 20.0, color: Colors.grey),
+                    ),
+                  ),
+                  accountName: Text("Yunesh Shrestha"),
+                  accountEmail: Text("yuneshshrestha24@gmail.com")),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text("Home"),
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text("Settings"),
+              ),
+            ],
+          ),
+        ),
+        appBar: AppBar(
+          title: const Text("Cards"),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(children: [
+              cardList(),
+              imageBox(context),
+              btnList(context),
+            ]),
+          ),
         ),
       ),
     );
@@ -36,9 +62,9 @@ class Home extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            // Navigator.pushNamed(context, "/");
+            Navigator.pushNamed(context, "/dog");
           },
-          child: const Text("Contact"),
+          child: const Text("Dog"),
         ),
         ElevatedButton(
           onPressed: () {

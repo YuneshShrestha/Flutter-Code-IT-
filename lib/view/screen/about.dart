@@ -11,11 +11,12 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
-  Map data = {};
+  List data = [];
   bool? isLoading;
-  Future getSaying() async {
-    var response =
-        await http.get(Uri.parse('https://api.adviceslip.com/advice'));
+  Future getDog() async {
+    var response = await http.get(
+        Uri.parse('https://api.thedogapi.com/v1/breeds'),
+        headers: {'x-api-key': 'ABC123'});
     setState(() {
       data = jsonDecode(response.body);
       isLoading = false;
@@ -24,38 +25,26 @@ class _AboutState extends State<About> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getSaying();
+    getDog();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            isLoading = true;
-          });
-          getSaying();
-        },
-        child: const Icon(Icons.sync),
-      ),
-      appBar: AppBar(
-        title: const Text("Day By Day Saying"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Saying Of The Day",
-                style: TextStyle(color: Colors.grey, fontSize: 20)),
-            isLoading != true
-                ? Text(data['slip']['advice'])
-                : const CircularProgressIndicator()
-          ],
+        appBar: AppBar(
+          title: const Text("Dog List"),
         ),
-      ),
-    );
+        body: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                  child: Column(
+                children: [
+                  Image.network(data[index]['image']['url']),
+                  Text(data[index]['name']),
+                ],
+              ));
+            }));
   }
 }
