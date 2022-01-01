@@ -1,3 +1,5 @@
+import 'package:day2/util/app_color.dart';
+import 'package:day2/util/app_size.dart';
 import 'package:day2/view/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 
@@ -34,17 +36,82 @@ class Home extends StatelessWidget {
         ),
         appBar: AppBar(
           title: const Text("Cards"),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSize.marginX, vertical: AppSize.marginY),
             child: Column(children: [
-              cardList(),
-              imageBox(context),
-              btnList(context),
+              cardImages(context,
+                  "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+              gap(),
+              cardImages(context,
+                  "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+              gap(),
+              cardImages(context,
+                  "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+              gap(),
+              cardImages(context,
+                  "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+
+              // Card(
+              //   child: ListTile(
+              //     contentPadding: EdgeInsets.all(AppSize.listPadding),
+              //     title: Text("Hello World"),
+              //     subtitle: Text("Its me yunesh."),
+              //   ),
+              // ),
+              // Card(
+              //   child: ListTile(
+              //     contentPadding: EdgeInsets.all(AppSize.listPadding),
+              //     title: Text("Hello World"),
+              //     subtitle: Text("Its me yunesh."),
+              //   ),
+              // ),
             ]),
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox gap() {
+    return const SizedBox(
+      height: 10.0,
+    );
+  }
+
+  Container cardImages(BuildContext context, String image) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: AppSize.cardHeight,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSize.cardBorderRadius),
+          border: Border.all(color: AppColor.secondaryColor),
+          image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(image)),
+          boxShadow: const [
+            BoxShadow(
+                color: AppColor.primaryColor,
+                offset: Offset(0, 0),
+                blurRadius: AppSize.cardBorderRadius,
+                spreadRadius: 0.5)
+          ]),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSize.cardBorderRadius),
+          color: Colors.black.withOpacity(0.8),
+        ),
+        child: const Center(
+            child: Text(
+          "Hello",
+          style: TextStyle(color: Colors.white),
+          textScaleFactor: 2.0,
+        )),
       ),
     );
   }

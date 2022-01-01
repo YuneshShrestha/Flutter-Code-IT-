@@ -1,3 +1,4 @@
+import 'package:day2/util/app_color.dart';
 import 'package:day2/view/screen/about.dart';
 import 'package:day2/view/screen/dog.dart';
 import 'package:day2/view/screen/home.dart';
@@ -17,6 +18,20 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: AppColor.primaryColor,
+        appBarTheme: AppBarTheme.of(context).copyWith(
+          backgroundColor: Colors.white,
+          titleTextStyle:
+              const TextStyle(color: AppColor.primaryColor, fontSize: 20),
+          iconTheme:
+              IconTheme.of(context).copyWith(color: AppColor.primaryColor),
+          elevation: 0.2,
+        ),
+        // textTheme: ,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                primary: AppColor.primaryColor,
+                textStyle: const TextStyle(color: AppColor.textColor))),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -26,7 +41,6 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
       ),
       initialRoute: "/",
       routes: {
